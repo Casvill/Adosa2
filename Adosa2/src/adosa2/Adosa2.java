@@ -4,6 +4,7 @@
  */
 package adosa2;
 
+import view.ViewInstructions;
 import view.ViewLobby;
 
 /**
@@ -18,7 +19,8 @@ public class Adosa2 {
     public static void main(String[] args) 
     {
         // TODO code application logic here
-        new ViewLobby().setVisible(true);
+        //new ViewLobby().setVisible(true);
+        new ViewInstructions().setVisible(true);
     }
     
 }
