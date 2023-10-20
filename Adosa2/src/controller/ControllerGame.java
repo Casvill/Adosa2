@@ -1,7 +1,7 @@
 package controller;
 
 import model.ModelGame;
-import view.ViewGame;
+import view.ViewLobby;
 
 /**
  *
@@ -10,6 +10,6 @@ import view.ViewGame;
 public class ControllerGame 
 {
     private ModelGame mGame;
-    private ViewGame vGame;
+    private ViewLobby vGame;
     
 }

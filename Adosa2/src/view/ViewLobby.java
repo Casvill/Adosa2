@@ -8,12 +8,12 @@ package view;
  *
  * @author andre
  */
-public class ViewGame extends javax.swing.JFrame {
+public class ViewLobby extends javax.swing.JFrame {
 
     /**
      * Creates new form ViewGame1
      */
-    public ViewGame() {
+    public ViewLobby() {
         initComponents();
     }
 
@@ -37,6 +37,11 @@ public class ViewGame extends javax.swing.JFrame {
         jbWhaItIsFor.setBorder(null);
         jbWhaItIsFor.setBorderPainted(false);
         jbWhaItIsFor.setFocusable(false);
+        jbWhaItIsFor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbWhaItIsForActionPerformed(evt);
+            }
+        });
         getContentPane().add(jbWhaItIsFor);
         jbWhaItIsFor.setBounds(560, 380, 270, 128);
 
@@ -46,6 +51,10 @@ public class ViewGame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jbWhaItIsForActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbWhaItIsForActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbWhaItIsForActionPerformed
 
     /**
      * @param args the command line arguments
