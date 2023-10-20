@@ -1,13 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package controller;
+
+import model.ModelGame;
+import view.ViewGame;
 
 /**
  *
  * @author Daniel Casvill
  */
-public class ControllerGame {
+public class ControllerGame 
+{
+    private ModelGame mGame;
+    private ViewGame vGame;
     
 }
