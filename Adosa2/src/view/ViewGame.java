@@ -26,19 +26,21 @@ public class ViewGame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        jbWhaItIsFor = new javax.swing.JButton();
         JLbackgroundLobby = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(832, 555));
         getContentPane().setLayout(null);
 
-        jButton1.setText("jButton1");
-        getContentPane().add(jButton1);
-        jButton1.setBounds(440, 280, 79, 27);
+        jbWhaItIsFor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/button_what_it_is_for.png"))); // NOI18N
+        jbWhaItIsFor.setBorder(null);
+        jbWhaItIsFor.setBorderPainted(false);
+        jbWhaItIsFor.setFocusable(false);
+        getContentPane().add(jbWhaItIsFor);
+        jbWhaItIsFor.setBounds(560, 380, 270, 128);
 
         JLbackgroundLobby.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/lobby.png"))); // NOI18N
-        JLbackgroundLobby.setPreferredSize(new java.awt.Dimension(832, 555));
         getContentPane().add(JLbackgroundLobby);
         JLbackgroundLobby.setBounds(0, 0, 832, 546);
 
@@ -52,6 +54,6 @@ public class ViewGame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel JLbackgroundLobby;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jbWhaItIsFor;
     // End of variables declaration//GEN-END:variables
 }
