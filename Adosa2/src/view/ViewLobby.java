@@ -26,6 +26,8 @@ public class ViewLobby extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jbInstructions = new javax.swing.JButton();
+        jbPlay = new javax.swing.JButton();
         jbWhaItIsFor = new javax.swing.JButton();
         JLbackgroundLobby = new javax.swing.JLabel();
 
@@ -33,9 +35,33 @@ public class ViewLobby extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(832, 555));
         getContentPane().setLayout(null);
 
-        jbWhaItIsFor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/button_what_it_is_for.png"))); // NOI18N
+        jbInstructions.setBorder(null);
+        jbInstructions.setBorderPainted(false);
+        jbInstructions.setContentAreaFilled(false);
+        jbInstructions.setFocusable(false);
+        jbInstructions.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbInstructionsActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jbInstructions);
+        jbInstructions.setBounds(20, 380, 180, 130);
+
+        jbPlay.setBorder(null);
+        jbPlay.setBorderPainted(false);
+        jbPlay.setContentAreaFilled(false);
+        jbPlay.setFocusable(false);
+        jbPlay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbPlayActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jbPlay);
+        jbPlay.setBounds(240, 380, 320, 130);
+
         jbWhaItIsFor.setBorder(null);
         jbWhaItIsFor.setBorderPainted(false);
+        jbWhaItIsFor.setContentAreaFilled(false);
         jbWhaItIsFor.setFocusable(false);
         jbWhaItIsFor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -43,7 +69,7 @@ public class ViewLobby extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jbWhaItIsFor);
-        jbWhaItIsFor.setBounds(560, 380, 270, 128);
+        jbWhaItIsFor.setBounds(560, 390, 270, 120);
 
         JLbackgroundLobby.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/lobby.png"))); // NOI18N
         getContentPane().add(JLbackgroundLobby);
@@ -52,9 +78,17 @@ public class ViewLobby extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jbPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPlayActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbPlayActionPerformed
+
     private void jbWhaItIsForActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbWhaItIsForActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jbWhaItIsForActionPerformed
+
+    private void jbInstructionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInstructionsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbInstructionsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -63,6 +97,8 @@ public class ViewLobby extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel JLbackgroundLobby;
+    private javax.swing.JButton jbInstructions;
+    private javax.swing.JButton jbPlay;
     private javax.swing.JButton jbWhaItIsFor;
     // End of variables declaration//GEN-END:variables
 }

@@ -51,7 +51,7 @@ public class ViewInstructions extends javax.swing.JFrame {
         jbExitInstructions.setBorderPainted(false);
         jbExitInstructions.setContentAreaFilled(false);
         getContentPane().add(jbExitInstructions);
-        jbExitInstructions.setBounds(740, 20, 72, 70);
+        jbExitInstructions.setBounds(740, 20, 76, 70);
 
         jlBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/instructions1.png"))); // NOI18N
         jlBackground.setVerticalAlignment(javax.swing.SwingConstants.TOP);
