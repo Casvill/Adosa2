@@ -38,7 +38,7 @@ public class ViewGame extends javax.swing.JFrame {
         jlLive2 = new javax.swing.JLabel();
         jlLive3 = new javax.swing.JLabel();
         jlScore = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jButton = new javax.swing.JButton();
         jlFont = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -54,7 +54,7 @@ public class ViewGame extends javax.swing.JFrame {
 
         jLabel3.setPreferredSize(new java.awt.Dimension(120, 118));
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(355, 420, 120, 118);
+        jLabel3.setBounds(355, 430, 120, 118);
 
         jLabel4.setPreferredSize(new java.awt.Dimension(120, 118));
         getContentPane().add(jLabel4);
@@ -90,10 +90,10 @@ public class ViewGame extends javax.swing.JFrame {
         getContentPane().add(jlScore);
         jlScore.setBounds(10, 10, 310, 30);
 
-        jButton1.setBorderPainted(false);
-        jButton1.setContentAreaFilled(false);
-        getContentPane().add(jButton1);
-        jButton1.setBounds(610, 390, 140, 140);
+        jButton.setBorderPainted(false);
+        jButton.setContentAreaFilled(false);
+        getContentPane().add(jButton);
+        jButton.setBounds(610, 390, 140, 140);
 
         jlFont.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/game.png"))); // NOI18N
         jlFont.setAlignmentY(0.0F);
@@ -106,7 +106,7 @@ public class ViewGame extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

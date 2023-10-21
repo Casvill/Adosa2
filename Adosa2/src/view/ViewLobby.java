@@ -4,6 +4,8 @@
  */
 package view;
 
+import java.awt.event.ActionListener;
+
 /**
  *
  * @author andre
@@ -15,6 +17,18 @@ public class ViewLobby extends javax.swing.JFrame {
      */
     public ViewLobby() {
         initComponents();
+    }
+    
+    public void addBtnInstructionsListener(ActionListener listenControllers){
+        jbInstructions.addActionListener(listenControllers);
+    }
+    
+    public void addBtnPlayListener(ActionListener listenControllers){
+        jbPlay.addActionListener(listenControllers);
+    }
+    
+    public void addBtnWhatItIsForListener(ActionListener listenControllers){
+        jbWhaItIsFor.addActionListener(listenControllers);
     }
 
     /**
@@ -35,41 +49,33 @@ public class ViewLobby extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(832, 555));
         getContentPane().setLayout(null);
 
+        jbInstructions.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        jbInstructions.setForeground(new java.awt.Color(30, 30, 30));
+        jbInstructions.setText("instructions");
         jbInstructions.setBorder(null);
         jbInstructions.setBorderPainted(false);
         jbInstructions.setContentAreaFilled(false);
         jbInstructions.setFocusable(false);
-        jbInstructions.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbInstructionsActionPerformed(evt);
-            }
-        });
         getContentPane().add(jbInstructions);
         jbInstructions.setBounds(20, 380, 180, 130);
 
+        jbPlay.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        jbPlay.setText("play");
         jbPlay.setBorder(null);
         jbPlay.setBorderPainted(false);
         jbPlay.setContentAreaFilled(false);
         jbPlay.setFocusable(false);
-        jbPlay.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbPlayActionPerformed(evt);
-            }
-        });
         getContentPane().add(jbPlay);
-        jbPlay.setBounds(240, 380, 320, 130);
+        jbPlay.setBounds(240, 380, 310, 130);
 
+        jbWhaItIsFor.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        jbWhaItIsFor.setText("whatItIsFor");
         jbWhaItIsFor.setBorder(null);
         jbWhaItIsFor.setBorderPainted(false);
         jbWhaItIsFor.setContentAreaFilled(false);
         jbWhaItIsFor.setFocusable(false);
-        jbWhaItIsFor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbWhaItIsForActionPerformed(evt);
-            }
-        });
         getContentPane().add(jbWhaItIsFor);
-        jbWhaItIsFor.setBounds(560, 390, 270, 120);
+        jbWhaItIsFor.setBounds(570, 390, 250, 120);
 
         JLbackgroundLobby.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/lobby.png"))); // NOI18N
         getContentPane().add(JLbackgroundLobby);
@@ -77,18 +83,6 @@ public class ViewLobby extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jbPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPlayActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jbPlayActionPerformed
-
-    private void jbWhaItIsForActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbWhaItIsForActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jbWhaItIsForActionPerformed
-
-    private void jbInstructionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInstructionsActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jbInstructionsActionPerformed
 
     /**
      * @param args the command line arguments

@@ -50,6 +50,7 @@ public class ViewInstructions extends javax.swing.JFrame {
 
         jbExitInstructions.setBorderPainted(false);
         jbExitInstructions.setContentAreaFilled(false);
+        jbExitInstructions.setPreferredSize(new java.awt.Dimension(76, 70));
         getContentPane().add(jbExitInstructions);
         jbExitInstructions.setBounds(740, 20, 76, 70);
 

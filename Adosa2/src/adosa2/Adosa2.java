@@ -4,6 +4,7 @@
  */
 package adosa2;
 
+import controller.ControllerLobby;
 import view.ViewInstructions;
 import view.ViewLobby;
 
@@ -19,7 +20,8 @@ public class Adosa2 {
     public static void main(String[] args) 
     {
         // TODO code application logic here
-        new ViewLobby().setVisible(true);
+        ViewLobby view = new ViewLobby();
+        ControllerLobby controller = new ControllerLobby(view);
         //new ViewInstructions().setVisible(true);
     }
     
