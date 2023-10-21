@@ -4,6 +4,8 @@
  */
 package view;
 
+import java.awt.event.ActionListener;
+
 /**
  *
  * @author andre
@@ -15,6 +17,14 @@ public class ViewInstructions extends javax.swing.JFrame {
      */
     public ViewInstructions() {
         initComponents();
+    }
+    
+    public void addBtnNextListener(ActionListener listenControllers){
+        jbNext.addActionListener(listenControllers);
+    }
+    
+    public void addBtnExitInstructionstListener(ActionListener listenControllers){
+        jbExitInstructions.addActionListener(listenControllers);
     }
 
     /**
@@ -38,16 +48,15 @@ public class ViewInstructions extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(832, 555));
         getContentPane().setLayout(null);
 
+        jbNext.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        jbNext.setText("next");
         jbNext.setBorderPainted(false);
         jbNext.setContentAreaFilled(false);
-        jbNext.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbNextActionPerformed(evt);
-            }
-        });
         getContentPane().add(jbNext);
         jbNext.setBounds(680, 170, 140, 70);
 
+        jbExitInstructions.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        jbExitInstructions.setText("exit");
         jbExitInstructions.setBorderPainted(false);
         jbExitInstructions.setContentAreaFilled(false);
         jbExitInstructions.setPreferredSize(new java.awt.Dimension(76, 70));
@@ -62,10 +71,6 @@ public class ViewInstructions extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jbNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNextActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jbNextActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jbExitInstructions;

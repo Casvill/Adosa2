@@ -6,6 +6,7 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import view.ViewInstructions;
 import view.ViewLobby;
 
 /**
@@ -19,8 +20,8 @@ public class ControllerLobby
     public ControllerLobby(ViewLobby viewLobby) 
     {
         this.viewLobby = viewLobby;
-        viewLobby.setVisible(true);
-        viewLobby.setLocationRelativeTo(null);
+        this.viewLobby.setVisible(true);
+        this.viewLobby.setLocationRelativeTo(null);
         
         this.viewLobby.addBtnInstructionsListener(new LobbyListener());
         this.viewLobby.addBtnPlayListener(new LobbyListener());
@@ -36,6 +37,7 @@ public class ControllerLobby
             if(e.getActionCommand().equalsIgnoreCase("instructions"))
             {
                 System.out.println("test1");
+                new ControllerInstructions(new ViewInstructions());
             }
             
             if(e.getActionCommand().equalsIgnoreCase("play"))
