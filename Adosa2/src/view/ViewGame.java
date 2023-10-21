@@ -26,24 +26,80 @@ public class ViewGame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jlLive1 = new javax.swing.JLabel();
+        jlLive2 = new javax.swing.JLabel();
+        jlLive3 = new javax.swing.JLabel();
+        jlScore = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jlFont = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
-        jButton1.setText("jButton1");
-        jButton1.setMaximumSize(new java.awt.Dimension(120, 118));
-        jButton1.setMinimumSize(new java.awt.Dimension(120, 118));
-        jButton1.setPreferredSize(new java.awt.Dimension(120, 118));
-        getContentPane().add(jButton1);
-        jButton1.setBounds(350, 10, 120, 118);
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/game.png"))); // NOI18N
-        jLabel1.setAlignmentY(0.0F);
-        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jLabel1.setPreferredSize(new java.awt.Dimension(120, 118));
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 0, 832, 555);
+        jLabel1.setBounds(355, 140, 120, 118);
+
+        jLabel2.setPreferredSize(new java.awt.Dimension(120, 118));
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(355, 310, 120, 118);
+
+        jLabel3.setPreferredSize(new java.awt.Dimension(120, 118));
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(355, 420, 120, 118);
+
+        jLabel4.setPreferredSize(new java.awt.Dimension(120, 118));
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(540, 220, 120, 118);
+
+        jLabel5.setPreferredSize(new java.awt.Dimension(120, 118));
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(690, 220, 120, 118);
+
+        jLabel6.setPreferredSize(new java.awt.Dimension(120, 118));
+        getContentPane().add(jLabel6);
+        jLabel6.setBounds(170, 220, 120, 118);
+
+        jLabel7.setPreferredSize(new java.awt.Dimension(120, 118));
+        getContentPane().add(jLabel7);
+        jLabel7.setBounds(20, 220, 120, 118);
+
+        jLabel8.setPreferredSize(new java.awt.Dimension(120, 118));
+        getContentPane().add(jLabel8);
+        jLabel8.setBounds(355, 10, 120, 118);
+        getContentPane().add(jlLive1);
+        jlLive1.setBounds(730, 10, 90, 70);
+
+        jlLive2.setText("jLabel9");
+        getContentPane().add(jlLive2);
+        jlLive2.setBounds(640, 10, 90, 70);
+
+        jlLive3.setText("jLabel9");
+        getContentPane().add(jlLive3);
+        jlLive3.setBounds(540, 10, 90, 70);
+
+        jlScore.setText("jLabel12");
+        getContentPane().add(jlScore);
+        jlScore.setBounds(10, 10, 310, 30);
+
+        jButton1.setBorderPainted(false);
+        jButton1.setContentAreaFilled(false);
+        getContentPane().add(jButton1);
+        jButton1.setBounds(610, 390, 140, 140);
+
+        jlFont.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/game.png"))); // NOI18N
+        jlFont.setAlignmentY(0.0F);
+        jlFont.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        getContentPane().add(jlFont);
+        jlFont.setBounds(0, 0, 832, 555);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -86,5 +142,17 @@ public class ViewGame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jlFont;
+    private javax.swing.JLabel jlLive1;
+    private javax.swing.JLabel jlLive2;
+    private javax.swing.JLabel jlLive3;
+    private javax.swing.JLabel jlScore;
     // End of variables declaration//GEN-END:variables
 }
