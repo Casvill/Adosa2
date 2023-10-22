@@ -42,8 +42,8 @@ public class ControllerLobby
             if(e.getActionCommand().equalsIgnoreCase("play"))
             {
                 //System.out.println("test2");
-                new ControllerGame(new ViewGame(), new ModelGame());
                 viewLobby.dispose();
+                new ControllerGame(new ViewGame(), new ModelGame());                
             }
             
             if(e.getActionCommand().equalsIgnoreCase("whatItIsFor"))

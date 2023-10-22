@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.event.ActionListener;
+import javax.swing.Icon;
 
 /**
  *
@@ -149,4 +150,45 @@ public class ViewGame extends javax.swing.JFrame {
     {
         jlLive3.setIcon(new javax.swing.ImageIcon(getClass().getResource(imagePath)));
     }
+
+    public void setJLabel1Icon(String imagePath)
+    {
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource(imagePath)));
+    }
+    
+    public void setJLabel2Icon(String imagePath)
+    {
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource(imagePath)));
+    }
+    
+    public void setJLabel3Icon(String imagePath)
+    {
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource(imagePath)));
+    }
+    
+    public void setJLabel4Icon(String imagePath)
+    {
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource(imagePath)));
+    }
+    
+    public void setJLabel5Icon(String imagePath)
+    {
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource(imagePath)));
+    }
+    
+    public void setJLabel6Icon(String imagePath)
+    {
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource(imagePath)));
+    }
+    
+    public void setJLabel7Icon(String imagePath)
+    {
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource(imagePath)));
+    }
+    
+    public void setJLabel8Icon(String imagePath)
+    {
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource(imagePath)));
+    }
+    
 }
