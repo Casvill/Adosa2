@@ -39,9 +39,12 @@ public class ViewGame extends javax.swing.JFrame {
         jlLive3 = new javax.swing.JLabel();
         jlScore = new javax.swing.JLabel();
         jButton = new javax.swing.JButton();
-        jlFont = new javax.swing.JLabel();
+        jlBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(832, 555));
+        setPreferredSize(new java.awt.Dimension(832, 555));
+        setSize(new java.awt.Dimension(832, 555));
         getContentPane().setLayout(null);
 
         jLabel1.setPreferredSize(new java.awt.Dimension(120, 118));
@@ -75,18 +78,22 @@ public class ViewGame extends javax.swing.JFrame {
         jLabel8.setPreferredSize(new java.awt.Dimension(120, 118));
         getContentPane().add(jLabel8);
         jLabel8.setBounds(355, 10, 120, 118);
+
+        jlLive1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/live_green.png"))); // NOI18N
         getContentPane().add(jlLive1);
-        jlLive1.setBounds(730, 10, 90, 70);
+        jlLive1.setBounds(740, 10, 70, 70);
 
-        jlLive2.setText("jLabel9");
+        jlLive2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/live_green.png"))); // NOI18N
         getContentPane().add(jlLive2);
-        jlLive2.setBounds(640, 10, 90, 70);
+        jlLive2.setBounds(650, 10, 70, 70);
 
-        jlLive3.setText("jLabel9");
+        jlLive3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/live_green.png"))); // NOI18N
         getContentPane().add(jlLive3);
-        jlLive3.setBounds(540, 10, 90, 70);
+        jlLive3.setBounds(560, 10, 70, 70);
 
-        jlScore.setText("jLabel12");
+        jlScore.setFont(new java.awt.Font("Tempus Sans ITC", 1, 18)); // NOI18N
+        jlScore.setForeground(new java.awt.Color(0, 0, 204));
+        jlScore.setText("Puntuación:");
         getContentPane().add(jlScore);
         jlScore.setBounds(10, 10, 310, 30);
 
@@ -95,11 +102,11 @@ public class ViewGame extends javax.swing.JFrame {
         getContentPane().add(jButton);
         jButton.setBounds(610, 390, 140, 140);
 
-        jlFont.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/game.png"))); // NOI18N
-        jlFont.setAlignmentY(0.0F);
-        jlFont.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        getContentPane().add(jlFont);
-        jlFont.setBounds(0, 0, 832, 555);
+        jlBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/game.png"))); // NOI18N
+        jlBackground.setAlignmentY(0.0F);
+        jlBackground.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        getContentPane().add(jlBackground);
+        jlBackground.setBounds(0, 0, 832, 555);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -115,7 +122,7 @@ public class ViewGame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jlFont;
+    private javax.swing.JLabel jlBackground;
     private javax.swing.JLabel jlLive1;
     private javax.swing.JLabel jlLive2;
     private javax.swing.JLabel jlLive3;

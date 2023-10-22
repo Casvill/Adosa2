@@ -34,7 +34,7 @@ public class ControllerInstructions
         {
             if(e.getActionCommand().equalsIgnoreCase("next"))
             {
-                System.out.println("next");
+                //System.out.println("next");
                 byte pos = modelInstructions.getPosition();
                 if(pos == 1)
                 {
@@ -55,7 +55,7 @@ public class ControllerInstructions
             
             if(e.getActionCommand().equalsIgnoreCase("back"))
             {
-                System.out.println("back");
+                //System.out.println("back");
                 byte pos = modelInstructions.getPosition();
                 if(pos == 2)
                 {
@@ -76,7 +76,7 @@ public class ControllerInstructions
             
             if(e.getActionCommand().equalsIgnoreCase("exit"))
             {
-                System.out.println("exit");
+                //System.out.println("exit");
                 viewInstructions.dispose();
             }
         }

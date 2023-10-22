@@ -1,7 +1,8 @@
 package controller;
 
 import model.ModelGame;
-import view.ViewLobby;
+import view.ViewGame;
+
 
 /**
  *
@@ -9,7 +10,17 @@ import view.ViewLobby;
  */
 public class ControllerGame 
 {
-    private ModelGame mGame;
-    private ViewLobby vGame;
+    private ModelGame modelGame;
+    private ViewGame viewGame;
+
+    public ControllerGame(ViewGame viewGame, ModelGame modelGame) 
+    {
+        this.modelGame = modelGame;
+        this.viewGame = viewGame;
+        
+        this.viewGame.setVisible(true);
+        this.viewGame.setLocationRelativeTo(null);
+    }
+    
     
 }
