@@ -4,6 +4,8 @@
  */
 package view;
 
+import java.awt.event.ActionListener;
+
 /**
  *
  * @author andre
@@ -16,6 +18,11 @@ public class ViewGame extends javax.swing.JFrame {
     public ViewGame() {
         initComponents();
     }
+    
+    public void addBtnButtonListener(ActionListener listenControllers){
+        jButton.addActionListener(listenControllers);
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -97,8 +104,11 @@ public class ViewGame extends javax.swing.JFrame {
         getContentPane().add(jlScore);
         jlScore.setBounds(10, 10, 310, 30);
 
+        jButton.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        jButton.setText("button");
         jButton.setBorderPainted(false);
         jButton.setContentAreaFilled(false);
+        jButton.setFocusPainted(false);
         getContentPane().add(jButton);
         jButton.setBounds(610, 390, 140, 140);
 
@@ -128,4 +138,19 @@ public class ViewGame extends javax.swing.JFrame {
     private javax.swing.JLabel jlLive3;
     private javax.swing.JLabel jlScore;
     // End of variables declaration//GEN-END:variables
+
+    public void setJlLive1Icon(String imagePath)
+    {
+        jlLive1.setIcon(new javax.swing.ImageIcon(getClass().getResource(imagePath)));
+    }
+    
+    public void setJlLive2Icon(String imagePath)
+    {
+        jlLive2.setIcon(new javax.swing.ImageIcon(getClass().getResource(imagePath)));
+    }
+    
+    public void setJlLive3Icon(String imagePath)
+    {
+        jlLive3.setIcon(new javax.swing.ImageIcon(getClass().getResource(imagePath)));
+    }
 }

@@ -1,5 +1,7 @@
 package controller;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import model.ModelGame;
 import view.ViewGame;
 
@@ -20,7 +22,22 @@ public class ControllerGame
         
         this.viewGame.setVisible(true);
         this.viewGame.setLocationRelativeTo(null);
+        
+        this.viewGame.addBtnButtonListener(new GameListener());
     }
     
+    class GameListener implements ActionListener
+    {
+
+        @Override
+        public void actionPerformed(ActionEvent e) 
+        {
+            if(e.getActionCommand().equalsIgnoreCase("button"))
+            {
+                System.out.println("Button Pressed");
+            }                        
+        }
+        
+    }
     
 }

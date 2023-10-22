@@ -8,19 +8,22 @@ public class ModelGame
 {
     private short hits;
     private short failures;
-    private int punctuation;
+    private int score;
     private byte lives;
 
     public ModelGame() 
     {
-    
+        hits = 0;
+        failures = 0;
+        score = 0;
+        lives = 3;
     }
 
-    public ModelGame(short hits, short failures, int punctuation, byte lives) 
+    public ModelGame(short hits, short failures, int score, byte lives) 
     {
         this.hits = hits;
         this.failures = failures;
-        this.punctuation = punctuation;
+        this.score = score;
         this.lives = lives;
     }
 
@@ -44,14 +47,14 @@ public class ModelGame
         this.failures = failures;
     }
 
-    public int getPunctuation() 
+    public int getScore() 
     {
-        return punctuation;
+        return score;
     }
 
-    public void setPunctuation(int punctuation) 
+    public void setScore(int score) 
     {
-        this.punctuation = punctuation;
+        this.score = score;
     }
 
     public byte getLives() 
