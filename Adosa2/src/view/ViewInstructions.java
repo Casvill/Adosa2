@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package view;
 
 import java.awt.event.ActionListener;
@@ -12,15 +8,18 @@ import java.awt.event.ActionListener;
  */
 public class ViewInstructions extends javax.swing.JFrame {
 
-    /**
-     * Creates new form ViewInstructions
-     */
+    
     public ViewInstructions() {
         initComponents();
+        
     }
     
     public void addBtnNextListener(ActionListener listenControllers){
         jbNext.addActionListener(listenControllers);
+    }
+    
+    public void addBtnBackListener(ActionListener listenControllers){
+        jbBack.addActionListener(listenControllers);
     }
     
     public void addBtnExitInstructionstListener(ActionListener listenControllers){
@@ -38,6 +37,7 @@ public class ViewInstructions extends javax.swing.JFrame {
 
         jbNext = new javax.swing.JButton();
         jbExitInstructions = new javax.swing.JButton();
+        jbBack = new javax.swing.JButton();
         jlBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -52,6 +52,7 @@ public class ViewInstructions extends javax.swing.JFrame {
         jbNext.setText("next");
         jbNext.setBorderPainted(false);
         jbNext.setContentAreaFilled(false);
+        jbNext.setFocusPainted(false);
         getContentPane().add(jbNext);
         jbNext.setBounds(680, 170, 140, 70);
 
@@ -59,20 +60,38 @@ public class ViewInstructions extends javax.swing.JFrame {
         jbExitInstructions.setText("exit");
         jbExitInstructions.setBorderPainted(false);
         jbExitInstructions.setContentAreaFilled(false);
+        jbExitInstructions.setFocusPainted(false);
         jbExitInstructions.setPreferredSize(new java.awt.Dimension(76, 70));
         getContentPane().add(jbExitInstructions);
         jbExitInstructions.setBounds(740, 20, 76, 70);
 
+        jbBack.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        jbBack.setText("back");
+        jbBack.setBorderPainted(false);
+        jbBack.setContentAreaFilled(false);
+        jbBack.setFocusPainted(false);
+        getContentPane().add(jbBack);
+        jbBack.setBounds(10, 170, 150, 60);
+
         jlBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/instructions1.png"))); // NOI18N
         jlBackground.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jlBackground.setAlignmentY(0.0F);
+        jlBackground.setMaximumSize(new java.awt.Dimension(832, 555));
+        jlBackground.setMinimumSize(new java.awt.Dimension(832, 555));
+        jlBackground.setPreferredSize(new java.awt.Dimension(832, 555));
         getContentPane().add(jlBackground);
         jlBackground.setBounds(0, 0, 832, 555);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void setJlBackgroundIcon(String imagePath)
+    {
+        jlBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource(imagePath)));
+    }
+        
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jbBack;
     private javax.swing.JButton jbExitInstructions;
     private javax.swing.JButton jbNext;
     private javax.swing.JLabel jlBackground;

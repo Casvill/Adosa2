@@ -1,11 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import model.ModelInstructions;
 import view.ViewInstructions;
 import view.ViewLobby;
 
@@ -15,7 +12,7 @@ import view.ViewLobby;
  */
 public class ControllerLobby 
 {
-    private ViewLobby viewLobby;
+    private final ViewLobby viewLobby;
 
     public ControllerLobby(ViewLobby viewLobby) 
     {
@@ -36,8 +33,8 @@ public class ControllerLobby
         {
             if(e.getActionCommand().equalsIgnoreCase("instructions"))
             {
-                System.out.println("test1");
-                new ControllerInstructions(new ViewInstructions());
+                //System.out.println("test1");
+                new ControllerInstructions(new ViewInstructions(),new ModelInstructions());
             }
             
             if(e.getActionCommand().equalsIgnoreCase("play"))
