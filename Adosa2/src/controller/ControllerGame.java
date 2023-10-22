@@ -25,6 +25,7 @@ public class ControllerGame
     
     
     private final String url; //Path where figure images are located
+    
     private List<String> figureImages;
     private List<String> squaresUsed;
     
@@ -46,19 +47,23 @@ public class ControllerGame
         
         figureImages = new ArrayList<String>();
         squaresUsed = new ArrayList<String>();
-        url = "src/images/figures";      
         
-        initGame();
+        url = "src/images/figures";   
+        
+        timerInterval = 2500;
+        timer = new Timer();
+        task = new UpdateFigures(); 
+        
+        resetFigures(3);
+        initTimer();
     }
     
     //------------------------------------------------------------------------------------------------
     
-    public void initGame()
-    {
-        resetFigures(3);        
-        timer = new Timer();
-        task = new UpdateFigures();
-        timerInterval = 3000;
+    public void initTimer()
+    {                
+        task.cancel();
+        task = new UpdateFigures();        
         timer.scheduleAtFixedRate(task, 0, timerInterval);
     }
     
@@ -137,6 +142,7 @@ public class ControllerGame
     
     public void resetFigures(int num)
     {
+        
         figureImages = getFigureImages(num);
         List<String> methods = getMethodsRandomly((byte)num);
         String method;
@@ -180,7 +186,6 @@ public class ControllerGame
     
     public void cleanFigureImages() 
     {
-        System.out.println("Squares: " + squaresUsed);
         try
         {            
             Class<?> classViewGame = viewGame.getClass();
@@ -221,12 +226,14 @@ public class ControllerGame
     public void failure()
     {
         modelGame.setLives((byte) (modelGame.getLives()- 1)); 
-        System.out.println("Failure!!");
-        /*timer.purge();
-        task.cancel();
-        timerInterval += 250;
         
-        timer.scheduleAtFixedRate(task, 0, timerInterval);*/
+        if(timerInterval <= 500)
+        {
+            timerInterval += 250;
+        }
+                
+        System.out.println("3Time Interval:"+timerInterval);
+        
         
         
         if(modelGame.getLives() > 0)
@@ -244,6 +251,8 @@ public class ControllerGame
             {
                 resetFigures(3);
             }
+            
+            initTimer();
         }
         else
         {
@@ -260,13 +269,16 @@ public class ControllerGame
     
     public void hit()
     {
-        System.out.println("hit!!");
         cleanFigureImages();
-        /*timer.purge();
-        task.cancel();
-        timerInterval -= 250;
+
+        if(timerInterval >= 500)
+        {
+            timerInterval -= 250;
+        }
         
-        timer.scheduleAtFixedRate(task, 0, timerInterval);*/
+        System.out.println("1Time Interval:"+timerInterval);
+        
+        
         
         if(figureImages.size() < 8)
         {
@@ -276,6 +288,8 @@ public class ControllerGame
         {
             resetFigures(8);
         }
+        
+        initTimer();
     }
         
     //------------------------------------------------------------------------------------------------
@@ -283,10 +297,13 @@ public class ControllerGame
     public void updateFigure()
     {
         int rand = (int)(Math.random() * squaresUsed.size());
+        
         String newFigureImage = getFigureImages(1).get(0);
+        
         figureImages.remove(rand);
         figureImages.add(rand, newFigureImage);
-  
+        
+        
         try
         { 
             Class<?> classViewGame = viewGame.getClass();
@@ -307,7 +324,6 @@ public class ControllerGame
         @Override
         public void run()
         {
-            System.out.println("images:"+figureImages);
             updateFigure();
         }
     }
