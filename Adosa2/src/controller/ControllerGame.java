@@ -26,9 +26,11 @@ public class ControllerGame
     
     private final String url; //Path where figure images are located
     private List<String> figureImages;
+    private List<String> squaresUsed;
     
-    TimerTask task;
-    Timer timer;
+    private TimerTask task;
+    private Timer timer;
+    private int timerInterval;
     
     //------------------------------------------------------------------------------------------------
     
@@ -42,7 +44,8 @@ public class ControllerGame
         
         this.viewGame.addBtnButtonListener(new GameListener());
         
-        figureImages = new ArrayList<>();
+        figureImages = new ArrayList<String>();
+        squaresUsed = new ArrayList<String>();
         url = "src/images/figures";      
         
         initGame();
@@ -52,25 +55,11 @@ public class ControllerGame
     
     public void initGame()
     {
-        updateFigures(3);        
+        resetFigures(3);        
         timer = new Timer();
         task = new UpdateFigures();
-        timer.scheduleAtFixedRate(task, 0, 3000);
-    }
-    
-    
-    //------------------------------------------------------------------------------------------------
-    
-    private String getElementRandomly(List<String> list)
-    {
-        int max = list.size();
-        
-        int rand = (int)(Math.random() * max);
-        
-        String element = list.get(rand);
-        
-        
-        return element;
+        timerInterval = 3000;
+        timer.scheduleAtFixedRate(task, 0, timerInterval);
     }
     
     //------------------------------------------------------------------------------------------------
@@ -112,16 +101,19 @@ public class ControllerGame
     
     public List<String> getFigureImages(int num) 
     {
-        List<String> Figures = new ArrayList<>();
+        List<String> figures = listFilesInFolder(url);
+        Collections.shuffle(figures);
+        figures = figures.subList(0, num);
         String figure;
         
-        for(int i = 0; i < num; i++)
-        {
-            figure = getElementRandomly(listFilesInFolder(url)); //Choose a figure randomly
-            Figures.add(figure.substring(3));            
+        for(int i = 0; i < figures.size(); i++)
+        {         
+            figure = figures.get(i).substring(3);
+            figures.remove(i);
+            figures.add(i, figure);
         }
         
-        return Figures;
+        return figures;
     }
     
     //------------------------------------------------------------------------------------------------
@@ -143,19 +135,20 @@ public class ControllerGame
     
     //------------------------------------------------------------------------------------------------
     
-    public void updateFigures(int num)
+    public void resetFigures(int num)
     {
         figureImages = getFigureImages(num);
         List<String> methods = getMethodsRandomly((byte)num);
-        
+        String method;
                
         try
-        {
-            
+        { 
             Class<?> classViewGame = viewGame.getClass();
             for(int i = 0; i < num; i++)
             {
-                classViewGame.getMethod(methods.get(i), String.class).invoke(viewGame, figureImages.get(i));
+                method = methods.get(i);
+                classViewGame.getMethod(method, String.class).invoke(viewGame, figureImages.get(i));
+                squaresUsed.add(method);
             }
             
         }
@@ -187,21 +180,21 @@ public class ControllerGame
     
     public void cleanFigureImages() 
     {
+        System.out.println("Squares: " + squaresUsed);
         try
-        {
+        {            
             Class<?> classViewGame = viewGame.getClass();
-            for(int i = 1; i <= 8; i++)
+            for(int i = 0; i < squaresUsed.size(); i++)
             {
-                String method = "setJLabel"+i+"Icon";
-                classViewGame.getMethod(method, String.class).invoke(viewGame, "");
+                //String method = "setJLabel"+i+"Icon";
+                classViewGame.getMethod(squaresUsed.get(i), String.class).invoke(viewGame, "");
             }
+            squaresUsed.clear();
         }
         catch(IllegalAccessException | NoSuchMethodException | SecurityException | InvocationTargetException error)
         {
             System.out.println("error:" + error);
-
-        }
-        
+        }        
     }
     
     //------------------------------------------------------------------------------------------------
@@ -229,8 +222,13 @@ public class ControllerGame
     {
         modelGame.setLives((byte) (modelGame.getLives()- 1)); 
         System.out.println("Failure!!");
+        /*timer.purge();
+        task.cancel();
+        timerInterval += 250;
         
-        System.out.println("lives:"+modelGame.getLives());
+        timer.scheduleAtFixedRate(task, 0, timerInterval);*/
+        
+        
         if(modelGame.getLives() > 0)
         {
             
@@ -240,11 +238,11 @@ public class ControllerGame
             
             if(figureImages.size() > 3)
             {                        
-                updateFigures(figureImages.size() - 1);
+                resetFigures(figureImages.size() - 1);
             }
             else
             {
-                updateFigures(3);
+                resetFigures(3);
             }
         }
         else
@@ -257,15 +255,60 @@ public class ControllerGame
         }
         
     }
+    
+    //------------------------------------------------------------------------------------------------    
+    
+    public void hit()
+    {
+        System.out.println("hit!!");
+        cleanFigureImages();
+        /*timer.purge();
+        task.cancel();
+        timerInterval -= 250;
         
+        timer.scheduleAtFixedRate(task, 0, timerInterval);*/
+        
+        if(figureImages.size() < 8)
+        {
+            resetFigures(figureImages.size() + 1);
+        }
+        else
+        {
+            resetFigures(8);
+        }
+    }
+        
+    //------------------------------------------------------------------------------------------------
+    
+    public void updateFigure()
+    {
+        int rand = (int)(Math.random() * squaresUsed.size());
+        String newFigureImage = getFigureImages(1).get(0);
+        figureImages.remove(rand);
+        figureImages.add(rand, newFigureImage);
+  
+        try
+        { 
+            Class<?> classViewGame = viewGame.getClass();
+
+            classViewGame.getMethod(squaresUsed.get(rand), String.class).invoke(viewGame, newFigureImage);
+
+        }
+        catch(IllegalAccessException | NoSuchMethodException | SecurityException | InvocationTargetException error)
+        {
+            System.out.println("error:" + error);
+        }
+    }
+    
     //------------------------------------------------------------------------------------------------
     
     class UpdateFigures extends TimerTask
     {
+        @Override
         public void run()
         {
-            cleanFigureImages();
-            updateFigures(figureImages.size());
+            System.out.println("images:"+figureImages);
+            updateFigure();
         }
     }
     
@@ -282,16 +325,7 @@ public class ControllerGame
             {                                                
                 if(hasRepeatedElements(figureImages))
                 {
-                    System.out.println("hit!!");
-                    cleanFigureImages();
-                    if(figureImages.size() < 8)
-                    {
-                        updateFigures(figureImages.size() + 1);
-                    }
-                    else
-                    {
-                        updateFigures(8);
-                    }
+                    hit();
                 }
                 else
                 {
