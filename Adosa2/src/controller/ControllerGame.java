@@ -35,6 +35,9 @@ public final class ControllerGame
     private int minimumTimerInterval;
     private int maximumTimerInterval;
     private int timerSteps;
+    private int delayTime;
+    
+    private int numberOfTasks;
     
     //------------------------------------------------------------------------------------------------
     
@@ -54,32 +57,41 @@ public final class ControllerGame
     
     public void initGame()
     {
+        numberOfTasks = 0;
         figureImages = new ArrayList<>();
         squaresUsed = new ArrayList<>();
         
         url = "src/images/figures";   
         
-        timerInterval = 2400;
-        minimumTimerInterval = 800;
-        maximumTimerInterval = 2400;
-        timerSteps = 200;
-        
-        timer = new Timer();
-        task = new UpdateFigures();
-        
+        timerInterval = 900;//2400;
+        minimumTimerInterval = 900;//800;
+        maximumTimerInterval = 900;//2400;
+        timerSteps = 0;//200;
+        delayTime = 1700;        
         
         resetFigures(3);
-        //Thread.sleep(2500);
-        initTimer();
+        initTimerTimer();
     }
     
     //------------------------------------------------------------------------------------------------
     
-    public void initTimer()
-    {                
-        task.cancel();
+    public void initTimerTimer()
+    {                  
+        //System.out.println("1- Number of tasks: "+numerOfTasks);
+        numberOfTasks++;        
+        timer = new Timer();
         task = new UpdateFigures();        
-        timer.scheduleAtFixedRate(task, 1600, timerInterval);        
+        timer.scheduleAtFixedRate(task, delayTime, timerInterval);        
+        //System.out.println("2- Number of tasks: "+numerOfTasks);
+    }
+    
+    public void cancelTimer()
+    {
+        //System.out.println("3- Number of tasks: "+numerOfTasks);
+        numberOfTasks--;        
+        task.cancel();
+        timer.purge();
+        //System.out.println("4- Number of tasks: "+numerOfTasks);
     }
     
     //------------------------------------------------------------------------------------------------
@@ -105,8 +117,7 @@ public final class ControllerGame
             for (File file : files) 
             {
                 fileNames.add(url.substring(3)+"/"+file.getName());
-            }
-            System.out.println("Target"+fileNames);
+            }            
         } 
         
         else 
@@ -122,11 +133,12 @@ public final class ControllerGame
     
     public List<String> getFigureImages(int num) 
     {
-        System.out.println("*---getFigureImages:---------------------------------*");
+        //System.out.println("*---getFigureImages:---------------------------------*");
         List<String> figures = listFilesInFolder(url);
         Collections.shuffle(figures);
         figures = figures.subList(0, num);
-        System.out.println("*----------------------------------------------------*\n");
+        //System.out.println("Target"+figures);
+        //System.out.println("*----------------------------------------------------*\n");
         return figures;
     }
     
@@ -134,34 +146,32 @@ public final class ControllerGame
     
     public List<String> getMethodsRandomly(byte num)
     {
-        List<String> methods = new ArrayList<>();
-
+        List<String> methods = new ArrayList<>();        
         
-        for(int i = 1; i <= num; i++)
+        for(int i = 1; i <= 8; i++)
         {
             methods.add("setJLabel"+i+"Icon");
         }
   
         Collections.shuffle(methods);                   
         
-        return methods;
+        return methods.subList(0, num);
     }
     
     //------------------------------------------------------------------------------------------------
     
-    public void resetFigures(int num)
+    public void resetFigures(int numberOfFigures)
     {
         //figureImages.clear();
         //squaresUsed.clear();
-        figureImages = getFigureImages(num);
-        List<String> methods = getMethodsRandomly((byte)num);
-        //System.out.println("reseFigures: "+methods);
+        figureImages = getFigureImages(numberOfFigures);
+        List<String> methods = getMethodsRandomly((byte)numberOfFigures);
         String method;
                
         try
         { 
             Class<?> classViewGame = viewGame.getClass();
-            for(int i = 0; i < num; i++)
+            for(int i = 0; i < numberOfFigures; i++)
             {
                 method = methods.get(i);
                 classViewGame.getMethod(method, String.class).invoke(viewGame, figureImages.get(i));                
@@ -217,9 +227,11 @@ public final class ControllerGame
     
     public void updateLiveImage(int lives)
     {
+        System.out.println("***updateLiveImage***");
         try
         {
             String method = "setJlLive"+(lives+1)+"Icon";
+            System.out.println("method:"+method);
             
             Class<?> classViewGame = viewGame.getClass();
             classViewGame.getMethod(method, String.class).invoke(viewGame, "/images/live_red.png");
@@ -237,18 +249,21 @@ public final class ControllerGame
     public void failure()
     {
         System.out.println("Fail");
-        //task.cancel();
-        modelGame.setLives((byte)(modelGame.getLives()- 1)); 
         
+        viewGame.setEnabledButton(false);                
+        
+        modelGame.setLives((byte)(modelGame.getLives()- 1)); 
+        updateLiveImage(modelGame.getLives());
+        
+        pauseGame();
+
         if(timerInterval < maximumTimerInterval)
         {
             timerInterval += timerSteps;
         }
                                                 
         if(modelGame.getLives() > 0)
-        {            
-            updateLiveImage(modelGame.getLives());
-            
+        {                                    
             cleanFigureImages();
             
             if(figureImages.size() > 3)
@@ -258,9 +273,8 @@ public final class ControllerGame
             else
             {
                 resetFigures(3);
-            }
-            
-            initTimer();
+            }   
+            viewGame.setEnabledButton(true);
         }
         
         else
@@ -273,14 +287,27 @@ public final class ControllerGame
     //------------------------------------------------------------------------------------------------
     
     public void endGame()
-    {
-         System.out.println("Game over! You lose!");
-        task.cancel();
-        timer.purge();
-        updateLiveImage(modelGame.getLives());
-        cleanFigureImages();               
+    {                
+        System.out.println("Game over! You lose!");                  
+        //pauseGame();
+        cleanFigureImages();
         viewGame.dispose();
-        System.exit(0);
+        System.exit(0);        
+    }
+    
+    //------------------------------------------------------------------------------------------------    
+    
+    public void pauseGame()
+    {                
+        try
+            {
+                System.out.println("PAUSE");
+                Thread.sleep(2000);
+            }
+            catch(InterruptedException error)
+            {
+                System.out.println("error: " + error);
+            }        
     }
     
     //------------------------------------------------------------------------------------------------    
@@ -288,7 +315,7 @@ public final class ControllerGame
     public void hit()
     {
         System.out.println("Hit");
-        //task.cancel();
+
         cleanFigureImages();
 
         if(timerInterval > minimumTimerInterval)
@@ -304,8 +331,6 @@ public final class ControllerGame
         {
             resetFigures(8);
         }
-        
-        initTimer();
     }
         
     //------------------------------------------------------------------------------------------------
@@ -339,15 +364,17 @@ public final class ControllerGame
     {
         @Override
         public void run()
-        {            
-            //System.out.println("Squares:"+figureImages);
+        {                    
             if(hasRepeatedElements(figureImages))
             {                
-                failure();
+                cancelTimer();
+                failure();         
+                initTimerTimer();
             }
-            
-            updateFigure();
-            System.out.println("figureImages: " + figureImages);
+            else
+            {
+                updateFigure();
+            }
         }
     }
     
@@ -363,12 +390,16 @@ public final class ControllerGame
             {                                                
                 if(hasRepeatedElements(figureImages))
                 {
+                    cancelTimer();
                     hit();
+                    initTimerTimer();
                 }
                 
                 else
                 {
-                    failure();                    
+                    cancelTimer();
+                    failure();     
+                    initTimerTimer();
                 }
             }                        
         }

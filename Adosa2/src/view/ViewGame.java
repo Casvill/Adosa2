@@ -140,16 +140,19 @@ public class ViewGame extends javax.swing.JFrame {
     public void setJlLive1Icon(String imagePath)
     {
         jlLive1.setIcon(new javax.swing.ImageIcon(getClass().getResource(imagePath)));
+        System.out.println("Live1");
     }
     
     public void setJlLive2Icon(String imagePath)
     {
         jlLive2.setIcon(new javax.swing.ImageIcon(getClass().getResource(imagePath)));
+        System.out.println("Live2");
     }
     
     public void setJlLive3Icon(String imagePath)
     {
         jlLive3.setIcon(new javax.swing.ImageIcon(getClass().getResource(imagePath)));
+        System.out.println("Live3");
     }
 
     public void setJLabel1Icon(String imagePath)
@@ -190,6 +193,11 @@ public class ViewGame extends javax.swing.JFrame {
     public void setJLabel8Icon(String imagePath)
     {
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource(imagePath)));
+    }
+    
+    public void setEnabledButton(boolean bool)
+    {
+        jButton.setEnabled(bool);        
     }
     
 }
