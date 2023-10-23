@@ -18,13 +18,13 @@ import java.util.TimerTask;
  * @author Daniel Casvill
  */
 //---------------------------------------------------------------------------------------------------
-public class ControllerGame 
+public final class ControllerGame 
 {
-    private ModelGame modelGame;
-    private ViewGame viewGame;
+    private final ModelGame modelGame;
+    private final ViewGame viewGame;
     
     
-    private final String url; //Path where figure images are located
+    private String url; //Path where figure images are located
     
     private List<String> figureImages;
     private List<String> squaresUsed;
@@ -32,10 +32,13 @@ public class ControllerGame
     private TimerTask task;
     private Timer timer;
     private int timerInterval;
+    private int minimumTimerInterval;
+    private int maximumTimerInterval;
+    private int timerSteps;
     
     //------------------------------------------------------------------------------------------------
     
-    public ControllerGame(ViewGame viewGame, ModelGame modelGame) throws InterruptedException 
+    public ControllerGame(ViewGame viewGame, ModelGame modelGame) //throws InterruptedException 
     {
         this.modelGame = modelGame;
         this.viewGame = viewGame;
@@ -44,17 +47,28 @@ public class ControllerGame
         this.viewGame.setLocationRelativeTo(null);
         
         this.viewGame.addBtnButtonListener(new GameListener());
-        
-        figureImages = new ArrayList<String>();
-        squaresUsed = new ArrayList<String>();
+
+        initGame();
+    }
+    //------------------------------------------------------------------------------------------------
+    
+    public void initGame()
+    {
+        figureImages = new ArrayList<>();
+        squaresUsed = new ArrayList<>();
         
         url = "src/images/figures";   
         
-        timerInterval = 2500;
-        timer = new Timer();
-        task = new UpdateFigures(); 
+        timerInterval = 2400;
+        minimumTimerInterval = 800;
+        maximumTimerInterval = 2400;
+        timerSteps = 200;
         
-        resetFigures(3);      // Reset figures funciona bien, no repite imagenes, el problema es que inmediatamente después initTimer modifica una images y ahí es cuando se abre la posibilidad de repetir una imagen.  
+        timer = new Timer();
+        task = new UpdateFigures();
+        
+        
+        resetFigures(3);
         //Thread.sleep(2500);
         initTimer();
     }
@@ -123,7 +137,7 @@ public class ControllerGame
             System.out.println("3-getFigureImages: " + figures);
         }
         //System.out.println("getFigureImages: " + figures);
-        System.out.println("--------------------------");
+        System.out.println("--------------------------\n");
         return figures;
     }
     
@@ -173,36 +187,6 @@ public class ControllerGame
         }
     }
     
-    /*
-    public void resetFigures(int num)
-    {
-        figureImages.clear();
-        squaresUsed.clear();
-
-        for (int i = 0; i < num; i++)
-        {
-            String newFigure;
-            do {
-                newFigure = getFigureImages(1).get(0);
-            } while (figureImages.contains(newFigure)); // Comprueba si la figura ya está en la lista
-
-            figureImages.add(newFigure);
-
-            List<String> methods = getMethodsRandomly((byte)num);
-           String method = methods.get(i); // Asegúrate de tener acceso a la lista de methods
-            try
-            {
-                Class<?> classViewGame = viewGame.getClass();
-                classViewGame.getMethod(method, String.class).invoke(viewGame, newFigure);
-                squaresUsed.add(method);
-            }
-            catch (IllegalAccessException | NoSuchMethodException | SecurityException | InvocationTargetException error)
-            {
-                System.out.println("error:" + error);
-            }
-        }
-    }
-    */
     //------------------------------------------------------------------------------------------------
     
     public boolean hasRepeatedElements(List<String> list)
@@ -263,21 +247,17 @@ public class ControllerGame
     
     public void failure()
     {
-        task.cancel();
-        modelGame.setLives((byte) (modelGame.getLives()- 1)); 
-        
-        if(timerInterval <= 800)
-        {
-            timerInterval += 200;
-        }
-                
         System.out.println("Fail");
+        //task.cancel();
+        modelGame.setLives((byte)(modelGame.getLives()- 1)); 
         
-        
-        
-        if(modelGame.getLives() > 0)
+        if(timerInterval < maximumTimerInterval)
         {
-            
+            timerInterval += timerSteps;
+        }
+                                                
+        if(modelGame.getLives() > 0)
+        {            
             updateLiveImage(modelGame.getLives());
             
             cleanFigureImages();
@@ -293,35 +273,40 @@ public class ControllerGame
             
             initTimer();
         }
+        
         else
         {
-            updateLiveImage(modelGame.getLives());
-            cleanFigureImages();
-            task.cancel();
-            timer.purge();
-            System.out.println("Game ended! You lose!");
-            viewGame.dispose();
-            System.exit(0);
+            endGame();
         }
         
+    }
+    
+    //------------------------------------------------------------------------------------------------
+    
+    public void endGame()
+    {
+         System.out.println("Game over! You lose!");
+        task.cancel();
+        timer.purge();
+        updateLiveImage(modelGame.getLives());
+        cleanFigureImages();               
+        viewGame.dispose();
+        System.exit(0);
     }
     
     //------------------------------------------------------------------------------------------------    
     
     public void hit()
     {
-        task.cancel();
+        System.out.println("Hit");
+        //task.cancel();
         cleanFigureImages();
 
-        if(timerInterval >= 800)
+        if(timerInterval > minimumTimerInterval)
         {
-            timerInterval -= 200;
-        }
-        
-        System.out.println("Hit");
-        
-        
-        
+            timerInterval -= timerSteps;
+        }                       
+                
         if(figureImages.size() < 8)
         {
             resetFigures(figureImages.size() + 1);
@@ -365,14 +350,13 @@ public class ControllerGame
     {
         @Override
         public void run()
-        {
-            
+        {            
             //System.out.println("Squares:"+figureImages);
             if(hasRepeatedElements(figureImages))
-            {
-                System.out.println("epa");
+            {                
                 failure();
             }
+            
             updateFigure();
             System.out.println("figureImages: " + figureImages);
         }
@@ -383,7 +367,6 @@ public class ControllerGame
     
     class GameListener implements ActionListener
     {
-
         @Override
         public void actionPerformed(ActionEvent e) 
         {
@@ -393,10 +376,10 @@ public class ControllerGame
                 {
                     hit();
                 }
+                
                 else
                 {
-                    failure();
-                    
+                    failure();                    
                 }
             }                        
         }

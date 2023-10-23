@@ -17,6 +17,7 @@ public class ViewLobby extends javax.swing.JFrame {
      */
     public ViewLobby() {
         initComponents();
+        setSize(846, 583);
     }
     
     public void addBtnInstructionsListener(ActionListener listenControllers){

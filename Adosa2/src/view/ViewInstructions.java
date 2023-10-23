@@ -11,7 +11,7 @@ public class ViewInstructions extends javax.swing.JFrame {
     
     public ViewInstructions() {
         initComponents();
-        
+        setSize(846, 592);
     }
     
     public void addBtnNextListener(ActionListener listenControllers){
@@ -76,9 +76,6 @@ public class ViewInstructions extends javax.swing.JFrame {
         jlBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/instructions1.png"))); // NOI18N
         jlBackground.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jlBackground.setAlignmentY(0.0F);
-        jlBackground.setMaximumSize(new java.awt.Dimension(832, 555));
-        jlBackground.setMinimumSize(new java.awt.Dimension(832, 555));
-        jlBackground.setPreferredSize(new java.awt.Dimension(832, 555));
         getContentPane().add(jlBackground);
         jlBackground.setBounds(0, 0, 832, 555);
 

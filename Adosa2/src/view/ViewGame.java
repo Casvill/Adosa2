@@ -14,6 +14,7 @@ public class ViewGame extends javax.swing.JFrame {
      */
     public ViewGame() {
         initComponents();
+        setSize(846, 592);
     }
     
     public void addBtnButtonListener(ActionListener listenControllers){
