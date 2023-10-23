@@ -35,7 +35,7 @@ public class ControllerGame
     
     //------------------------------------------------------------------------------------------------
     
-    public ControllerGame(ViewGame viewGame, ModelGame modelGame) 
+    public ControllerGame(ViewGame viewGame, ModelGame modelGame) throws InterruptedException 
     {
         this.modelGame = modelGame;
         this.viewGame = viewGame;
@@ -54,7 +54,8 @@ public class ControllerGame
         timer = new Timer();
         task = new UpdateFigures(); 
         
-        resetFigures(3);
+        resetFigures(3);      // Reset figures funciona bien, no repite imagenes, el problema es que inmediatamente después initTimer modifica una images y ahí es cuando se abre la posibilidad de repetir una imagen.  
+        //Thread.sleep(2500);
         initTimer();
     }
     
@@ -64,7 +65,7 @@ public class ControllerGame
     {                
         task.cancel();
         task = new UpdateFigures();        
-        timer.scheduleAtFixedRate(task, 0, timerInterval);
+        timer.scheduleAtFixedRate(task, 1800, timerInterval);        
     }
     
     //------------------------------------------------------------------------------------------------
@@ -106,6 +107,7 @@ public class ControllerGame
     
     public List<String> getFigureImages(int num) 
     {
+        System.out.println("getFigureImages:-----------");
         List<String> figures = listFilesInFolder(url);
         Collections.shuffle(figures);
         figures = figures.subList(0, num);
@@ -114,10 +116,14 @@ public class ControllerGame
         for(int i = 0; i < figures.size(); i++)
         {         
             figure = figures.get(i).substring(3);
+            System.out.println("1-getFigureImages: " + figures);
             figures.remove(i);
+            System.out.println("2-getFigureImages: " + figures);
             figures.add(i, figure);
+            System.out.println("3-getFigureImages: " + figures);
         }
-        
+        //System.out.println("getFigureImages: " + figures);
+        System.out.println("--------------------------");
         return figures;
     }
     
@@ -128,23 +134,25 @@ public class ControllerGame
         List<String> methods = new ArrayList<>();
 
         
-        for(int i = 1; i <= 8; i++)
+        for(int i = 1; i <= num; i++)
         {
             methods.add("setJLabel"+i+"Icon");
         }
   
         Collections.shuffle(methods);                   
         
-        return methods.subList(0, num);
+        return methods;
     }
     
     //------------------------------------------------------------------------------------------------
     
     public void resetFigures(int num)
     {
-        
+        //figureImages.clear();
+        //squaresUsed.clear();
         figureImages = getFigureImages(num);
         List<String> methods = getMethodsRandomly((byte)num);
+        //System.out.println("reseFigures: "+methods);
         String method;
                
         try
@@ -153,7 +161,7 @@ public class ControllerGame
             for(int i = 0; i < num; i++)
             {
                 method = methods.get(i);
-                classViewGame.getMethod(method, String.class).invoke(viewGame, figureImages.get(i));
+                classViewGame.getMethod(method, String.class).invoke(viewGame, figureImages.get(i));                
                 squaresUsed.add(method);
             }
             
@@ -165,6 +173,36 @@ public class ControllerGame
         }
     }
     
+    /*
+    public void resetFigures(int num)
+    {
+        figureImages.clear();
+        squaresUsed.clear();
+
+        for (int i = 0; i < num; i++)
+        {
+            String newFigure;
+            do {
+                newFigure = getFigureImages(1).get(0);
+            } while (figureImages.contains(newFigure)); // Comprueba si la figura ya está en la lista
+
+            figureImages.add(newFigure);
+
+            List<String> methods = getMethodsRandomly((byte)num);
+           String method = methods.get(i); // Asegúrate de tener acceso a la lista de methods
+            try
+            {
+                Class<?> classViewGame = viewGame.getClass();
+                classViewGame.getMethod(method, String.class).invoke(viewGame, newFigure);
+                squaresUsed.add(method);
+            }
+            catch (IllegalAccessException | NoSuchMethodException | SecurityException | InvocationTargetException error)
+            {
+                System.out.println("error:" + error);
+            }
+        }
+    }
+    */
     //------------------------------------------------------------------------------------------------
     
     public boolean hasRepeatedElements(List<String> list)
@@ -225,14 +263,15 @@ public class ControllerGame
     
     public void failure()
     {
+        task.cancel();
         modelGame.setLives((byte) (modelGame.getLives()- 1)); 
         
-        if(timerInterval <= 500)
+        if(timerInterval <= 800)
         {
-            timerInterval += 250;
+            timerInterval += 200;
         }
                 
-        System.out.println("3Time Interval:"+timerInterval);
+        System.out.println("Fail");
         
         
         
@@ -261,6 +300,8 @@ public class ControllerGame
             task.cancel();
             timer.purge();
             System.out.println("Game ended! You lose!");
+            viewGame.dispose();
+            System.exit(0);
         }
         
     }
@@ -269,14 +310,15 @@ public class ControllerGame
     
     public void hit()
     {
+        task.cancel();
         cleanFigureImages();
 
-        if(timerInterval >= 500)
+        if(timerInterval >= 800)
         {
-            timerInterval -= 250;
+            timerInterval -= 200;
         }
         
-        System.out.println("1Time Interval:"+timerInterval);
+        System.out.println("Hit");
         
         
         
@@ -325,13 +367,14 @@ public class ControllerGame
         public void run()
         {
             
-            System.out.println("Squares:"+figureImages);
+            //System.out.println("Squares:"+figureImages);
             if(hasRepeatedElements(figureImages))
             {
                 System.out.println("epa");
                 failure();
             }
             updateFigure();
+            System.out.println("figureImages: " + figureImages);
         }
     }
     
