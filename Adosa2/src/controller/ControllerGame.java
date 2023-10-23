@@ -79,7 +79,7 @@ public final class ControllerGame
     {                
         task.cancel();
         task = new UpdateFigures();        
-        timer.scheduleAtFixedRate(task, 1800, timerInterval);        
+        timer.scheduleAtFixedRate(task, 1600, timerInterval);        
     }
     
     //------------------------------------------------------------------------------------------------
@@ -104,8 +104,9 @@ public final class ControllerGame
             // Iterate over the files and add their names to the list
             for (File file : files) 
             {
-                fileNames.add(url+"/"+file.getName());
+                fileNames.add(url.substring(3)+"/"+file.getName());
             }
+            System.out.println("Target"+fileNames);
         } 
         
         else 
@@ -121,23 +122,11 @@ public final class ControllerGame
     
     public List<String> getFigureImages(int num) 
     {
-        System.out.println("getFigureImages:-----------");
+        System.out.println("*---getFigureImages:---------------------------------*");
         List<String> figures = listFilesInFolder(url);
         Collections.shuffle(figures);
         figures = figures.subList(0, num);
-        String figure;
-        
-        for(int i = 0; i < figures.size(); i++)
-        {         
-            figure = figures.get(i).substring(3);
-            System.out.println("1-getFigureImages: " + figures);
-            figures.remove(i);
-            System.out.println("2-getFigureImages: " + figures);
-            figures.add(i, figure);
-            System.out.println("3-getFigureImages: " + figures);
-        }
-        //System.out.println("getFigureImages: " + figures);
-        System.out.println("--------------------------\n");
+        System.out.println("*----------------------------------------------------*\n");
         return figures;
     }
     
