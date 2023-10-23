@@ -324,6 +324,13 @@ public class ControllerGame
         @Override
         public void run()
         {
+            
+            System.out.println("Squares:"+figureImages);
+            if(hasRepeatedElements(figureImages))
+            {
+                System.out.println("epa");
+                failure();
+            }
             updateFigure();
         }
     }
