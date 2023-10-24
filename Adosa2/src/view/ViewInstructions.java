@@ -62,6 +62,11 @@ public class ViewInstructions extends javax.swing.JFrame {
         jbExitInstructions.setContentAreaFilled(false);
         jbExitInstructions.setFocusPainted(false);
         jbExitInstructions.setPreferredSize(new java.awt.Dimension(76, 70));
+        jbExitInstructions.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbExitInstructionsActionPerformed(evt);
+            }
+        });
         getContentPane().add(jbExitInstructions);
         jbExitInstructions.setBounds(740, 20, 76, 70);
 
@@ -81,6 +86,10 @@ public class ViewInstructions extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jbExitInstructionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbExitInstructionsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbExitInstructionsActionPerformed
 
     public void setJlBackgroundIcon(String imagePath)
     {
