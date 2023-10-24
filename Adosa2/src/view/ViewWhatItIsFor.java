@@ -12,6 +12,7 @@ public class ViewWhatItIsFor extends javax.swing.JFrame {
   
     public ViewWhatItIsFor() {
         initComponents();
+        setSize(846, 592);
     }
 
     public void addBtnExitWhatItIsForListener(ActionListener listenControllers){
@@ -29,6 +30,8 @@ public class ViewWhatItIsFor extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
+        jButtonExitWhatItIsFor.setActionCommand("exit");
+        jButtonExitWhatItIsFor.setBorderPainted(false);
         jButtonExitWhatItIsFor.setContentAreaFilled(false);
         jButtonExitWhatItIsFor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

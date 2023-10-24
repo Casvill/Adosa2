@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import model.ModelGame;
 import model.ModelInstructions;
-import model.ModelWhatItIsFor;
 import view.ViewGame;
 import view.ViewInstructions;
 import view.ViewLobby;
@@ -50,7 +49,7 @@ public class ControllerLobby
             
             if(e.getActionCommand().equalsIgnoreCase("whatItIsFor"))
             {
-                new ControllerWhatItIsFor(new ViewWhatItIsFor(),new ModelWhatItIsFor());
+                new ControllerWhatItIsFor(new ViewWhatItIsFor());
             }
             
         }
