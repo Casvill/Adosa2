@@ -7,6 +7,7 @@ import model.ModelInstructions;
 import view.ViewGame;
 import view.ViewInstructions;
 import view.ViewLobby;
+import view.ViewWhatItIsFor;
 
 /**
  *
@@ -48,7 +49,7 @@ public class ControllerLobby
             
             if(e.getActionCommand().equalsIgnoreCase("whatItIsFor"))
             {
-                System.out.println("test3");
+                new ControllerWhatItIsFor(new ViewWhatItIsFor());
             }
             
         }
