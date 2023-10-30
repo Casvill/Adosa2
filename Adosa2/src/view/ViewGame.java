@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.event.ActionListener;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 import javax.swing.Icon;
 import javax.swing.JLabel;
@@ -21,6 +22,10 @@ public class ViewGame extends javax.swing.JFrame {
     
     public void addBtnButtonListener(MouseListener listenControllers){
         jButton.addMouseListener(listenControllers);
+    }
+    
+    public void addKeyListener(KeyListener listenControllers){
+        jButton.addKeyListener(listenControllers);
     }
     
 

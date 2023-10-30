@@ -1,5 +1,7 @@
 package controller;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
@@ -52,6 +54,7 @@ public final class ControllerGame
         this.viewGame.setLocationRelativeTo(null);
         
         this.viewGame.addBtnButtonListener(new GameListener());
+        this.viewGame.addKeyListener(new GameListener2());
 
         initGame();
     }
@@ -456,4 +459,39 @@ public final class ControllerGame
     
     //------------------------------------------------------------------------------------------------
     
+    class GameListener2 implements KeyListener
+    {
+
+        @Override
+        public void keyTyped(KeyEvent e) {
+            
+        }
+
+        @Override
+        public void keyPressed(KeyEvent e) 
+        {
+            if (e.getKeyCode() == KeyEvent.VK_SPACE) 
+            {
+                if(hasRepeatedElements(figureImages))
+                {
+                    cancelTimer();
+                    hit();
+                    initTimerTimer();
+                }
+
+                else
+                {
+                    cancelTimer();                
+                    failure();     
+                    //initTimerTimer();
+                }
+            }
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+            
+        }
+        
+    }
 }
