@@ -2,6 +2,7 @@ package view;
 
 import java.awt.event.ActionListener;
 import javax.swing.Icon;
+import javax.swing.JLabel;
 
 /**
  *
@@ -199,5 +200,10 @@ public class ViewGame extends javax.swing.JFrame {
     {
         jButton.setEnabled(bool);        
     }
+
+    public void setJlScore(int newScore) {
+        this.jlScore.setText("Puntuación: "+newScore);
+    }
+    
     
 }

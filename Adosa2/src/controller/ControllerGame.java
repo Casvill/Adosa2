@@ -36,6 +36,7 @@ public final class ControllerGame
     private int maximumTimerInterval;
     private int timerSteps;
     private int delayTime;
+    private int scoreSteps;
     
     private int numberOfTasks;
     
@@ -67,7 +68,8 @@ public final class ControllerGame
         minimumTimerInterval = 900;//800;
         maximumTimerInterval = 900;//2400;
         timerSteps = 0;//200;
-        delayTime = 1700;        
+        delayTime = 1700;     
+        scoreSteps = 2;
         
         resetFigures(3);
         initTimerTimer();
@@ -310,6 +312,26 @@ public final class ControllerGame
             }        
     }
     
+    //------------------------------------------------------------------------------------------------  
+    
+    public void score()
+    {
+        int currentScore = modelGame.getScore();
+
+        if(currentScore > 0)
+        {
+            modelGame.setScore(currentScore + (scoreSteps * 5));
+            scoreSteps *= 2;
+        }
+        else
+        {
+            modelGame.setScore(5);
+        }            
+        
+        viewGame.setJlScore(modelGame.getScore());
+        
+    }
+    
     //------------------------------------------------------------------------------------------------    
     
     public void hit()
@@ -331,6 +353,8 @@ public final class ControllerGame
         {
             resetFigures(8);
         }
+        
+        score();
     }
         
     //------------------------------------------------------------------------------------------------
