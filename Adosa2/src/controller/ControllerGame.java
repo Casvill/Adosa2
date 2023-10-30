@@ -1,7 +1,7 @@
 package controller;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -11,6 +11,7 @@ import model.ModelGame;
 import view.ViewGame;
 import java.util.Timer;
 import java.util.TimerTask;
+import view.ViewStats;
 
 //---------------------------------------------------------------------------------------------------
 /**
@@ -64,10 +65,10 @@ public final class ControllerGame
         
         url = "src/images/figures";   
         
-        timerInterval = 900;//2400;
-        minimumTimerInterval = 900;//800;
-        maximumTimerInterval = 900;//2400;
-        timerSteps = 0;//200;
+        timerInterval = 2000;
+        minimumTimerInterval = 800;
+        maximumTimerInterval = 2000;
+        timerSteps = 200;
         delayTime = 1700;     
         scoreSteps = 2;
         
@@ -229,11 +230,11 @@ public final class ControllerGame
     
     public void updateLiveImage(int lives)
     {
-        System.out.println("***updateLiveImage***");
+        //System.out.println("***updateLiveImage***");
         try
         {
             String method = "setJlLive"+(lives+1)+"Icon";
-            System.out.println("method:"+method);
+            //System.out.println("method:"+method);
             
             Class<?> classViewGame = viewGame.getClass();
             classViewGame.getMethod(method, String.class).invoke(viewGame, "/images/live_red.png");
@@ -250,14 +251,13 @@ public final class ControllerGame
     
     public void failure()
     {
-        System.out.println("Fail");
+        modelGame.setFailures((short) (modelGame.getFailures() + 1));
         
         viewGame.setEnabledButton(false);                
         
         modelGame.setLives((byte)(modelGame.getLives()- 1)); 
         updateLiveImage(modelGame.getLives());
         
-        pauseGame();
 
         if(timerInterval < maximumTimerInterval)
         {
@@ -277,10 +277,12 @@ public final class ControllerGame
                 resetFigures(3);
             }   
             viewGame.setEnabledButton(true);
+            initTimerTimer();
         }
         
         else
         {
+            cancelTimer();
             endGame();
         }
         
@@ -290,11 +292,11 @@ public final class ControllerGame
     
     public void endGame()
     {                
-        System.out.println("Game over! You lose!");                  
+        //System.out.println("Game over! You lose!");                  
         //pauseGame();
         cleanFigureImages();
         viewGame.dispose();
-        System.exit(0);        
+        new ControllerStats(new ViewStats(), modelGame);    
     }
     
     //------------------------------------------------------------------------------------------------    
@@ -303,7 +305,7 @@ public final class ControllerGame
     {                
         try
             {
-                System.out.println("PAUSE");
+                //System.out.println("PAUSE");
                 Thread.sleep(2000);
             }
             catch(InterruptedException error)
@@ -336,7 +338,8 @@ public final class ControllerGame
     
     public void hit()
     {
-        System.out.println("Hit");
+        //System.out.println("Hit");
+        modelGame.setHits((short) (modelGame.getHits() + 1));
 
         cleanFigureImages();
 
@@ -391,9 +394,9 @@ public final class ControllerGame
         {                    
             if(hasRepeatedElements(figureImages))
             {                
-                cancelTimer();
+                cancelTimer();             
                 failure();         
-                initTimerTimer();
+                //initTimerTimer();
             }
             else
             {
@@ -405,27 +408,48 @@ public final class ControllerGame
     //------------------------------------------------------------------------------------------------
     
     
-    class GameListener implements ActionListener
+    class GameListener implements MouseListener
     {
+
+
         @Override
-        public void actionPerformed(ActionEvent e) 
+        public void mouseClicked(MouseEvent e) 
         {
-            if(e.getActionCommand().equalsIgnoreCase("button"))
-            {                                                
-                if(hasRepeatedElements(figureImages))
-                {
-                    cancelTimer();
-                    hit();
-                    initTimerTimer();
-                }
-                
-                else
-                {
-                    cancelTimer();
-                    failure();     
-                    initTimerTimer();
-                }
-            }                        
+                                                           
+            if(hasRepeatedElements(figureImages))
+            {
+                cancelTimer();
+                hit();
+                initTimerTimer();
+            }
+
+            else
+            {
+                cancelTimer();                
+                failure();     
+                //initTimerTimer();
+            }
+            
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+            
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+            
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+            
         }
         
     }

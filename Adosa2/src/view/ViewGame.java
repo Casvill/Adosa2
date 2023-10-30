@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 import javax.swing.Icon;
 import javax.swing.JLabel;
 
@@ -18,8 +19,8 @@ public class ViewGame extends javax.swing.JFrame {
         setSize(846, 592);
     }
     
-    public void addBtnButtonListener(ActionListener listenControllers){
-        jButton.addActionListener(listenControllers);
+    public void addBtnButtonListener(MouseListener listenControllers){
+        jButton.addMouseListener(listenControllers);
     }
     
 
@@ -141,19 +142,19 @@ public class ViewGame extends javax.swing.JFrame {
     public void setJlLive1Icon(String imagePath)
     {
         jlLive1.setIcon(new javax.swing.ImageIcon(getClass().getResource(imagePath)));
-        System.out.println("Live1");
+        //System.out.println("Live1");
     }
     
     public void setJlLive2Icon(String imagePath)
     {
         jlLive2.setIcon(new javax.swing.ImageIcon(getClass().getResource(imagePath)));
-        System.out.println("Live2");
+        //System.out.println("Live2");
     }
     
     public void setJlLive3Icon(String imagePath)
     {
         jlLive3.setIcon(new javax.swing.ImageIcon(getClass().getResource(imagePath)));
-        System.out.println("Live3");
+        //System.out.println("Live3");
     }
 
     public void setJLabel1Icon(String imagePath)
